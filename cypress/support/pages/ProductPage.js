@@ -34,5 +34,11 @@ class ProductPage{
     getGoToCartMenu(){
         return cy.get('.cartcontents')
     }
+    getOldPrice(){
+        return cy.get('.price del')
+    }
+    getActualPrice(){
+        return cy.get('.price ins')
+    }
 }
 export default ProductPage

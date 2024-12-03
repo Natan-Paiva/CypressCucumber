@@ -61,8 +61,8 @@ When('I click on add to basket button', () => {
     productPage.getAddToBasketButton().click()
 })
 
-Then('on the menu bar shoul show that 1 product is added and the amount', () => {
-    productPage.getCartContents().should('contain', '1')
+Then('on the menu bar shoul show that {int} product is added and the amount', (num,) => {
+    productPage.getCartContents().should('contain', num)
     productPage.getCartAmount().then(($cartPrice) => {
         const cartPrice = parseFloat($cartPrice.text().replace(/[^\d.-]/g, '')).toFixed(2)
 
