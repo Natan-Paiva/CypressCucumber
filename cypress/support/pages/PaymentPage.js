@@ -61,5 +61,12 @@ class PaymentPage{
     getPlaceOrderButton(){
         return cy.get('#place_order')
     }
+
+    getTax(){
+        return cy.get('tfoot th').contains('Tax').next()
+    }
+    getSubTotal(){
+        return cy.get('tfoot th').contains('Subtotal').next()
+    }
 }
 export default PaymentPage

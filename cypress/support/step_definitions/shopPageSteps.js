@@ -1,9 +1,11 @@
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor"
 import ShopPage from "../pages/ShopPage"
 import ProductPage from "../pages/ProductPage"
+import PaymentPage from "../pages/PaymentPage"
 
 const shopPage = new ShopPage
 const productPage = new ProductPage
+const paymentPage = new PaymentPage
 
 Then('I should be redirected to the shop page',() => {
     shopPage.getPageURL().should('include', 'shop')
@@ -92,5 +94,27 @@ Then('on the menu bar shoul show that {int} product is added and the amount is n
     productPage.getCartAmount().then(($cartPrice) => {
         const cartPrice = parseFloat($cartPrice.text().replace(/[^\d.-]/g, ''))
         expect(cartPrice).to.be.greaterThan(amount)
+    })
+})
+
+Then('Tax shoul be 2% of subtotal', () => {
+    paymentPage.getSubTotal().then(($subtotal) => {
+        const subtotal =  parseFloat($subtotal.text().replace(/[^\d.-]/g, ''))
+        paymentPage.getTax().then(($tax) => {
+            const tax =  parseFloat($tax.text().replace(/[^\d.-]/g, ''))
+            const expectedTax = subtotal*0.02
+            expect(expectedTax).to.eq(tax)
+        })
+    })
+})
+Then('Tax should be 5% of subtotal', () => {
+    cy.wait(3000)
+    paymentPage.getSubTotal().then(($subtotal) => {
+        const subtotal =  parseFloat($subtotal.text().replace(/[^\d.-]/g, ''))
+        paymentPage.getTax().then(($tax) => {
+            const tax =  parseFloat($tax.text().replace(/[^\d.-]/g, ''))
+            const expectedTax = subtotal*0.05
+            expect(expectedTax).to.eq(tax)
+        })
     })
 })

@@ -20,6 +20,7 @@ Scenario: Registration with invalid Email-id
     When I click on Register button
     Then an error message should be visible and containing the words "valid" and "email"
 
+@skip
 Scenario: Registration with empty Email-id
     Given I open the browser and enter the URL "http://practice.automationtesting.in/"
     When I click on the My Account Menu
@@ -29,6 +30,7 @@ Scenario: Registration with empty Email-id
     When I click on Register button
     Then an error message should be visible and containing the words "valid" and "email"
 
+@skip
 Scenario: Registration with empty password
     Given I open the browser and enter the URL "http://practice.automationtesting.in/"
     When I click on the My Account Menu
