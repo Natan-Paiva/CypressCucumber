@@ -96,24 +96,21 @@ Then('on the menu bar shoul show that {int} product is added and the amount is n
         expect(cartPrice).to.be.greaterThan(amount)
     })
 })
-
-Then('Tax shoul be 2% of subtotal', () => {
-    paymentPage.getSubTotal().then(($subtotal) => {
-        const subtotal =  parseFloat($subtotal.text().replace(/[^\d.-]/g, ''))
-        paymentPage.getTax().then(($tax) => {
-            const tax =  parseFloat($tax.text().replace(/[^\d.-]/g, ''))
-            const expectedTax = subtotal*0.02
-            expect(expectedTax).to.eq(tax)
-        })
+When('I select {string} as country', (str) => {
+    paymentPage.getCountry().type(str)
+    paymentPage.getSelectResults().each(($el, index, $list) => {
+        if($el.text() === str){
+            cy.wrap($el).click()
+        }
     })
 })
-Then('Tax should be 5% of subtotal', () => {
+Then('Tax should be {string}% of subtotal', (taxRate) => {
     cy.wait(3000)
     paymentPage.getSubTotal().then(($subtotal) => {
         const subtotal =  parseFloat($subtotal.text().replace(/[^\d.-]/g, ''))
         paymentPage.getTax().then(($tax) => {
             const tax =  parseFloat($tax.text().replace(/[^\d.-]/g, ''))
-            const expectedTax = subtotal*0.05
+            const expectedTax = subtotal*parseFloat(taxRate/100)
             expect(expectedTax).to.eq(tax)
         })
     })

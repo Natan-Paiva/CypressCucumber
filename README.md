@@ -35,4 +35,4 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas no s
 
    ```
 
-Obs.: Remova a tag "@skip" dos testes que desejar executar
+Obs.: Remova ou adicione a tag "@skip" em testes que desejar executar ou pular
