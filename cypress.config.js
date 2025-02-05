@@ -24,5 +24,12 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents,
     specPattern: 'cypress/integration/**/*.feature',
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      html: true,
+      json: true
+    }
   },
 });

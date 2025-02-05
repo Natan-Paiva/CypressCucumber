@@ -39,7 +39,7 @@ Scenario: Log-in -Password should be masked
     When I type the valid password "Qatesting.12345"
     Then the password should be masked
 #login accpets sensitive changed username, when it should not
-@skip
+
 Scenario: Login-Handles case sensitive -username
     When I enter a the valid username with case changed "TESTINGPRACTICENATAN"
     And the valid password "Qatesting.12345"
